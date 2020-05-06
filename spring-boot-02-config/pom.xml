@@ -35,6 +35,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- 導入配置文件處理器，配置文件進行綁定就會有提示 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>

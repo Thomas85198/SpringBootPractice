@@ -4,42 +4,51 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.Email;
-
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
- * 將配置文件中配置的每一個屬性的直，映射到這個組件中
- * @author Thomas Lu
- * @ConfigurationProperties:告訴SpringBoot將本類中所有屬性和配置文件中配置進行綁定
- * 	prefix = "person": 配置文件中哪個下面的所有屬性進行一一映射
- * 只有這個組件室容器中的組件，才能容器提供的@ConfigurationProperties功能
+ * 將配置文件中每一個屬性的值，映射到這個組件中
+ * @ConfigurationProperties：告訴SpringBoot將本類中的所有屬性和配置文件中相關的配置進行綁定
+ * 		prefix = "person"：配置文件中下面的所有屬性進行一一映射
+ * 
+ * 只有這個組件示容器中的組件，才能容器提供的@ConfigurationProperties功能
+ * @ConfigurationProperties(prefix = "person")默認從全局配置文件中獲取值：
+ * 
  */
+@PropertySource(value= {"classpath:person.properties"})
 @Component
-//@ConfigurationProperties(prefix = "person")
+@ConfigurationProperties(prefix = "person")
 //@Validated
 public class Person {
 
 	/**
 	 * <bean class="Person">
-	 * 	 <property name="lastName" value="字面量/${key}從環境變量、配置文件中獲取值/#{SpEL}"></property>
+	 * 		<property name="lastName" value="字面量${key}從環境變量、配置文件中獲取值/#{SpEL}"></property>
 	 * </bean>
 	 */
-	@Email
-	@Value("${person.last-name}")
-	//lastName必須室郵件格式
+	//@Value("${person.last-name}")
+	//lastName必須是電子郵件
+//	@Email
 	private String lastName;
+	
 	//@Value("#{11*2}")
 	private Integer age;
-	//@Value("true")
+	
 	private Boolean boss;
 	private Date birth;
-
-	// 2020-05-05 17:54:41.883  INFO 12792 --- [extShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'@Value("${person.maps}")
+	
+//	@Value("${person.maps}")
 	private Map<String, Object> maps;
 	private List<Object> lists;
 	private Dog dog;
+	
+	@Override
+	public String toString() {
+		return "Person [lastName=" + lastName + ", age=" + age + ", boss=" + boss + ", birth=" + birth + ", maps="
+				+ maps + ", lists=" + lists + ", dog=" + dog + "]";
+	}
 
 	public String getLastName() {
 		return lastName;
@@ -96,11 +105,9 @@ public class Person {
 	public void setDog(Dog dog) {
 		this.dog = dog;
 	}
-
-	@Override
-	public String toString() {
-		return "Person [lastName=" + lastName + ", age=" + age + ", boss=" + boss + ", birth=" + birth + ", maps="
-				+ maps + ", lists=" + lists + ", dog=" + dog + "]";
-	}
-
+	
+	
+	
+	
 }
+ 

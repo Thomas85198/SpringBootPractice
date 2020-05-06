@@ -9,10 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.luchienlin.springboot.bean.Person;
 
 /**
- * SpringBoot 單元測試
- * @author Thomas Lu
- * 可以在測試期間很方便的類似編碼依樣進行自動注入等容器的功能
- * 
+ * SpringBoot單元測試 可以在測試期間很方便的類似編碼依樣進行自動注入等容器功能
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +17,7 @@ class SpringBoot02ConfigApplicationTests {
 
 	@Autowired
 	Person person;
-	
+
 	@Test
 	public void contextLoads() {
 		System.out.println(person);
