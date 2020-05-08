@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * @ConfigurationProperties(prefix = "person")默認從全局配置文件中獲取值：
  * 
  */
-@PropertySource(value= {"classpath:person.properties"})
+//@PropertySource(value= {"classpath:person.properties"})
 @Component
 @ConfigurationProperties(prefix = "person")
 //@Validated
