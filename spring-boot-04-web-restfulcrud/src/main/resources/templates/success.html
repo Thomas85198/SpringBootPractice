@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>成功</h1>
+	<!-- th:text 將div裡面的文本內容設置為 -->
+	<div th:text="${hello}">這是顯示歡迎葉面</div>
+	<hr/>
+	<div th:text="${hello}"></div>
+	<div th:utext="${hello}"></div>
+	<hr/>
+	
+	<!-- th:each每次編歷都會生成當前這個標籤 , 2個h4 -->
+	<h4 th:text="${user}" th:each="user:${users}"></h4>
+	<hr/>
+	<h4>
+		<span th:each="user:${users}">[(${user})]</span>
+	</h4>
+	
+	
+</body>
+</html>
