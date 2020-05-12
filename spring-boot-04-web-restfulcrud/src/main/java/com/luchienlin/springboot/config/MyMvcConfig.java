@@ -3,9 +3,11 @@ package com.luchienlin.springboot.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.luchienlin.springboot.component.LoginHandlerIntercepter;
 import com.luchienlin.springboot.component.MyLocaleResolver;
 
 // 使用WebMvcConfigurerAdapter可以來擴展SpringMvc的功能
@@ -31,6 +33,17 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("login");
                 registry.addViewController("/login.html").setViewName("login");
+                // 防止重新導向
+                registry.addViewController("/main.html").setViewName("dashboard");
+            }
+            
+            // 註冊攔截器
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+            	// 靜態資源：*.css, *.js
+            	// SpringBoot已經做好了靜態資源映射
+            	registry.addInterceptor(new LoginHandlerIntercepter()).addPathPatterns("/**")
+            	.excludePathPatterns("/index.htnml","/","/user/login");
             }
 
         };
